@@ -56,5 +56,9 @@
     position: relative;
     top: 5px;
   }
+  body{
+    background-image: url("https://images.unsplash.com/photo-1498496294664-d9372eb521f3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f81344f21400a387f61effd4b5a4dcd5&auto=format&fit=crop&w=3450&q=80");
+    background-size: cover;
+  }
 
 </style>
