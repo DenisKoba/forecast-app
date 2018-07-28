@@ -47,28 +47,38 @@
         data() {
             return {
                 listOfCities: citiesList,
+                currentGeo:[],
                 value: {
-                    name: 'London'
+                    name: undefined
                 },
                 cityData: [],
-                currentData: [],
+                currentData: []
             }
         },
         created() {
+            this.getCurrentGeo()
+            if (this.value.name === undefined){
+                this.value.name = this.currentGeo.city
+            }
             this.getCityData()
             this.getCurrentData()
         },
         methods: {
-            getCityData(){
-                axios.get('https://api.openweathermap.org/data/2.5/forecast?q=' + this.value.name + '&units=metric&APPID=65b6075ccebccb206697e4659a3b9e26').then(response => {
-                    this.cityData = response.data
+            getCurrentGeo() {
+                axios.get('https://geoip-db.com/json').then(response => {
+                    this.currentGeo = response.data
                 })
             },
-            getCurrentData(){
+            getCityData() {
+                axios.get('https://api.openweathermap.org/data/2.5/forecast?q=' + this.value.name + '&units=metric&APPID=65b6075ccebccb206697e4659a3b9e26').then(response => {
+                    this.cityData = response.data
+            })
+            },
+            getCurrentData() {
                 axios.get('https://api.openweathermap.org/data/2.5/weather?q=' + this.value.name + '&units=metric&APPID=65b6075ccebccb206697e4659a3b9e26').then(response => {
                     this.currentData = response.data
-                })
-            }
+            })
+            },
         }
     }
 </script>
@@ -86,7 +96,7 @@
         overflow: scroll;
         color: #fff;
         background-color: #080808a3;
-        &__background{
+        &__background {
             position: fixed;
             width: 100%;
             height: 100%;
