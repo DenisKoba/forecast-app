@@ -11,11 +11,7 @@
     export default {
         name: 'weasther-timely',
         props: ['cityData', 'item'],
-        data() {
-            return {
-            }
         }
-    }
 </script>
 
 <style scoped lang="scss">

@@ -7,10 +7,10 @@
                     :options="listOfCities"
                     label="name"
                     :searchable="true"
-                    :close-on-select="false"
+                    :close-on-select="true"
                     :show-labels="false"
                     @input="getCurrentData(), getCityData()"
-                    placeholder="Pick a value">
+                    placeholder="Choose your city">
             </multiselect>
             <div class="forecast__city-name">{{value.name}}</div>
             <div class="forecast__current-temperature">{{currentData.main.temp_max}}°C</div>
@@ -48,7 +48,7 @@
             return {
                 listOfCities: citiesList,
                 value: {
-                    name: "Hurzuf,ua"
+                    name: 'London'
                 },
                 cityData: [],
                 currentData: [],
