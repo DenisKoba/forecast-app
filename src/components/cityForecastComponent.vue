@@ -47,7 +47,7 @@
         data() {
             return {
                 listOfCities: citiesList,
-                currentGeo:[],
+                currentGeo: {},
                 value: {
                     name: undefined
                 },
@@ -56,19 +56,20 @@
             }
         },
         created() {
-            this.getCurrentGeo()
-            if (this.value.name === undefined){
-                this.value.name = this.currentGeo.city
-            }
-            this.getCityData()
-            this.getCurrentData()
+                axios.get('https://geoip-db.com/json/').then(response => {
+                    this.currentGeo = response.data
+                    console.log(this.currentGeo.city)
+                    if (this.value.name === undefined) {
+                        this.value.name = this.currentGeo.city
+                        this.getCityData()
+                        this.getCurrentData()
+                    }
+                    this.getCityData()
+                    this.getCurrentData()
+                })
+
         },
         methods: {
-            getCurrentGeo() {
-                axios.get('https://geoip-db.com/json').then(response => {
-                    this.currentGeo = response.data
-                })
-            },
             getCityData() {
                 axios.get('https://api.openweathermap.org/data/2.5/forecast?q=' + this.value.name + '&units=metric&APPID=65b6075ccebccb206697e4659a3b9e26').then(response => {
                     this.cityData = response.data
